@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Dear, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2><br><br>
+
+  <h3>These are your list of wines!</h3><br><br>
+  {% if object_list %}
+    <ul>
+      {% for wine in object_list %}
+          <p>{{ wine.name_wine }}{% if not forloop.last %},{% endif %}</p>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No wines are available.</p>
+  {% endif %}
+
+{% endblock %}
