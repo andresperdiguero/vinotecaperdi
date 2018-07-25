@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Dear, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2><br><br>
+  <h2>Dear, {{ user.get_full_name }}{{ user.username }}!</h2>
 
-  <h3>These are your list of wines!</h3><br><br>
+  <h3>These are your list of wines!</h3><br>
   {% if object_list %}
-    <ul>
-      {% for wine in object_list %}
-          <p>{{ wine.name_wine }}{% if not forloop.last %},{% endif %}</p>
-      {% endfor %}
-    </ul>
+    <div class="list">
+      <ul class="b">
+        {% for wine in object_list %}
+            <li>{{ wine.name_wine }} - {{ wine.winery }} - {{ wine.varietal }} - {{ wine.harvest }}</li>
+        {% endfor %}
+      </ul>
+    </div>
   {% else %}
     <p>No wines are available.</p>
   {% endif %}

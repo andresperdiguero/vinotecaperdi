@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
     <meta charset="utf-8">
-    <title>{% block title %}Simple is Better Than Complex{% endblock %}</title>
+    <title>{% block title %}Rate your wine{% endblock %}</title>
   </head>
   <body>
     <header>
-      <h1>My vinotecaperdi</h1>
-      {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">logout</a>
-      {% else %}
-        <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
+      <div class="page-header">
+      <h1><a href="{% url 'home' %}">Vinotecaperdi</a></h1>
+        <div class="slogan">
+          <h2> Si vino y no toma vino para que vino!?</h2>
+            <div class="header-right">
+              {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">logout</a>
+              {% else %}
+                <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
+            </div>
+        </div>
+      </div>
       {% endif %}
       <hr>
     </header>
     <main>
+      
       {% block content %}
       {% endblock %}
     </main>

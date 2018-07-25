@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2><br><br>
-
-  <h4>Add a new wine!</h4><br>
+  <h2>Dear, {{ user.get_full_name }}{{ user.username }}!</h2>
+  <h3>Add a new wine!</h4><br>
 
     <form method="post">
       {% csrf_token %}
@@ -11,15 +10,12 @@
         <p>
           {{ field.label_tag }}<br>
           {{ field }}
-          {% if field.help_text %}
-            <small style="color: grey">{{ field.help_text }}</small>
-          {% endif %}
           {% for error in field.errors %}
             <p style="color: red">{{ error }}</p>
           {% endfor %}
         </p>
       {% endfor %}
-      <button type="submit" name="Add">Add wine</button>
+      <button type="submit" onclick=window.location='/thanks.html' class="button" name="Add">Add wine</button>
     </form>
-    
+
 {% endblock %}

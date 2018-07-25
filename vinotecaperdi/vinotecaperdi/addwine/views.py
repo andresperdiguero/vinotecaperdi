@@ -4,6 +4,10 @@ from vinotecaperdi.addwine.models import Wine
 from django.contrib.auth.decorators import login_required
 
 @login_required
+def thanks(request):
+    return render(request, 'thanks.html')
+
+@login_required
 def addnewwine(request):
     if request.method == 'POST':
         form = AddWineForm(request.POST)
@@ -16,7 +20,7 @@ def addnewwine(request):
             wine.varietal = request.POST.get('varietal')
             wine.user_name = request.user.username
             wine.save()
-            return redirect('home')
+            return redirect('thanks')
     else:
         form = AddWineForm()
     return render(request, 'form_addwine.html', {'form': form})

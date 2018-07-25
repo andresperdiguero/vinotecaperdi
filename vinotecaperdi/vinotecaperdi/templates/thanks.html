@@ -1,13 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<h2>Welcome, {{ user.get_full_name }} {{ user.username }}!</h2>
-{% endif %}
+  <h2>Dear, {{ user.get_full_name }}{{ user.username }}!</h2>
+  <h3> Thanks for add your experience!</h3><br>
 
   <button class="button" onclick=window.location='/addwine'>Add Wine</button>
   <button class="button" onclick=window.location='/mywines'>My Wines</button>
-
-
-
 {% endblock %}

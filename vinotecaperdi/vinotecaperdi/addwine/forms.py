@@ -4,7 +4,7 @@ from vinotecaperdi.addwine.models import Wine
 
 
 class AddWineForm(ModelForm):
-    name_wine = models.CharField(help_text='Required', max_length=50)
+    name_wine = models.CharField(max_length=50)
 
     class Meta:
         model = Wine

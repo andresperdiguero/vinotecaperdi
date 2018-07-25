@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'vinotecaperdi.addwine'
+    'vinotecaperdi.addwine',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -114,6 +114,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+STATICFILES_DIRS = (
+    '/home/andres/python_project/vinotecaperdi/vinotecaperdi/static',
+    )
 
 STATIC_URL = '/static/'
 LOGIN_URL = 'login'
