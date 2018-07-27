@@ -9,3 +9,7 @@ class AddWineForm(ModelForm):
     class Meta:
         model = Wine
         fields = ('name_wine', 'winery', 'harvest', 'varietal')
+
+class VoteWineForm(object):
+    model = Wine
+    fields = ('wine', 'rank')

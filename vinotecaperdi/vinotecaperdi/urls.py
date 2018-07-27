@@ -29,7 +29,9 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'template_name': 'logged_out.html'}, name='logout'),
     url(r'^signup/$', core_views.signup, name='signup'),
     url(r'^addwine/$', addwine_views.addnewwine, name='addwine'),
-    url(r'^mywines/$', addwine_views.listwine, name='mywines'),
-    url(r'^thanks/$', addwine_views.thanks, name='thanks')
+    url(r'^mywines/$', addwine_views.listwineuser, name='mywines'),
+    url(r'^thanks/$', addwine_views.thanks, name='thanks'),
+    url(r'^votes/$', addwine_views.WineListView, name='votes'),
+    url(r'^vote/$',addwine_views.RateWine, name='vote')
 
 ]

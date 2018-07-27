@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from vinotecaperdi.addwine.forms import AddWineForm
-from vinotecaperdi.addwine.models import Wine
+from vinotecaperdi.addwine.models import Wine, Rate
 from django.contrib.auth.decorators import login_required
+from vinotecaperdi.addwine.forms import VoteWineForm
 
 @login_required
 def thanks(request):
@@ -25,9 +26,7 @@ def addnewwine(request):
         form = AddWineForm()
     return render(request, 'form_addwine.html', {'form': form})
 
-
-
-def listwine(request):
+def listwineuser(request):
     username = request.user.username
     model = Wine
     queryset = Wine.objects.filter(user_name=username)
@@ -35,3 +34,21 @@ def listwine(request):
         "object_list": queryset
     }
     return render(request, 'mywines.html', context)
+
+def WineListView(request):
+    model = Wine
+    queryset = Wine.objects.all()
+    context = {
+        "object_list": queryset
+    }
+    return render(request, 'votes.html', context)
+
+def RateWine(request):
+    if request.method == 'POST':
+        form = VoteWineForm(request.POST)
+        if form.is_valid():
+            rate = Rate()
+            rate.wine_name = request.POST.get('wine')
+            rate.rank = request.POST.get('rank')
+            form.save()
+    return render(request, 'home.html', {'form': form})

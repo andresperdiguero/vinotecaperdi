@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Vote your favorite wine</h3>
+
+<b><p> Select your wine</p></b>
+
+  {% if object_list %}
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <select>
+      {% for form in object_list %}
+
+        <table>
+          <option value="{{form.all}}">{{form.name_wine}}-{{form.harvest}}-{{form.varietal}}</option>
+        </table>
+
+      {% endfor %}
+    </select><br><br>
+  <b><p> Rate your wine </p></b><br>
+        <input type="radio" name="rank" value="1" checked> 1
+        <input type="radio" name="rank" value="2"> 2
+        <input type="radio" name="rank" value="3"> 3
+        <input type="radio" name="rank" value="4"> 4
+        <input type="radio" name="rank" value="5"> 5<br><br>
+
+      <button type="submit" class="button">Vote</button>
+      <a href="{% url 'vote' %}"></a>
+
+  {% else %}
+    <p>No wines available.</p>
+  {% endif %}
+
+    </form>
+
+
+{% endblock %}

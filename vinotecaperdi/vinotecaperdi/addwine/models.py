@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg, Max, Min, Sum
 
 import datetime
 YEAR_CHOICES = []
@@ -11,3 +12,7 @@ class Wine (models.Model):
     winery=models.CharField(max_length=50)
     harvest=models.IntegerField(('harvest'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     varietal=models.CharField(max_length=30)
+
+class Rate(models.Model):
+    wine_name = models.CharField(max_length=100)
+    rate = models.IntegerField()
