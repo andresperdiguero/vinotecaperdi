@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^mywines/$', addwine_views.listwineuser, name='mywines'),
     url(r'^thanks/$', addwine_views.thanks, name='thanks'),
     url(r'^votes/$', addwine_views.WineListView, name='votes'),
-    url(r'^vote/$',addwine_views.RateWine, name='vote')
+    url(r'^vote/$',addwine_views.RateWine, name='vote'),
+    url(r'^ranking/$', addwine_views.ranking, name='ranking')
 
 ]

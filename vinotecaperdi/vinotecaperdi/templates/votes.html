@@ -6,26 +6,25 @@
 <b><p> Select your wine</p></b>
 
   {% if object_list %}
-    <form method="post" novalidate>
-      {% csrf_token %}
-      <select>
-      {% for form in object_list %}
+    <form method="post" action="{% url 'vote' %}">{% csrf_token %}
+
+      <select name="name_wine">
+      {% for obj in object_list %}
 
         <table>
-          <option value="{{form.all}}">{{form.name_wine}}-{{form.harvest}}-{{form.varietal}}</option>
+          <option value="{{obj.name_wine}}">{{obj.name_wine}}-{{obj.harvest}}-{{obj.varietal}}</option>
         </table>
 
       {% endfor %}
     </select><br><br>
   <b><p> Rate your wine </p></b><br>
-        <input type="radio" name="rank" value="1" checked> 1
-        <input type="radio" name="rank" value="2"> 2
-        <input type="radio" name="rank" value="3"> 3
-        <input type="radio" name="rank" value="4"> 4
-        <input type="radio" name="rank" value="5"> 5<br><br>
+        <input type="radio" name="rate" value="1" checked> 1
+        <input type="radio" name="rate" value="2"> 2
+        <input type="radio" name="rate" value="3"> 3
+        <input type="radio" name="rate" value="4"> 4
+        <input type="radio" name="rate" value="5"> 5<br><br>
 
-      <button type="submit" class="button">Vote</button>
-      <a href="{% url 'vote' %}"></a>
+      <button type="submit" class="button" >Vote</button>
 
   {% else %}
     <p>No wines available.</p>

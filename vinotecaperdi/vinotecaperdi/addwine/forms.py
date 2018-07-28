@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django.db import models
-from vinotecaperdi.addwine.models import Wine
+from vinotecaperdi.addwine.models import Wine, Rate
 
 
 class AddWineForm(ModelForm):
@@ -10,6 +10,7 @@ class AddWineForm(ModelForm):
         model = Wine
         fields = ('name_wine', 'winery', 'harvest', 'varietal')
 
-class VoteWineForm(object):
-    model = Wine
-    fields = ('wine', 'rank')
+class VoteWineForm(ModelForm):
+    class Meta:
+        model = Rate
+        fields = ('name_wine', 'rate')

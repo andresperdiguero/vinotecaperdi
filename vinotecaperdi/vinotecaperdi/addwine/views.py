@@ -3,6 +3,9 @@ from vinotecaperdi.addwine.forms import AddWineForm
 from vinotecaperdi.addwine.models import Wine, Rate
 from django.contrib.auth.decorators import login_required
 from vinotecaperdi.addwine.forms import VoteWineForm
+from django.db.models import Avg
+
+import numpy as np
 
 @login_required
 def thanks(request):
@@ -12,6 +15,7 @@ def thanks(request):
 def addnewwine(request):
     if request.method == 'POST':
         form = AddWineForm(request.POST)
+        print request.POST
         if form.is_valid():
             wine = Wine()
             #wine = form.save(commit=False)
@@ -48,7 +52,21 @@ def RateWine(request):
         form = VoteWineForm(request.POST)
         if form.is_valid():
             rate = Rate()
-            rate.wine_name = request.POST.get('wine')
-            rate.rank = request.POST.get('rank')
-            form.save()
-    return render(request, 'home.html', {'form': form})
+            rate.name_wine = request.POST.get('name_wine')
+            rate.rate = request.POST.get('rate')
+            rate.save()
+            return redirect('home')
+    else:
+        form = VoteWineForm()
+    return render(request, 'votes.html', {'form': form})
+
+def ranking(request):
+    ranking_list = []
+    for wine in Wine.objects.all():
+        list_rate = Rate.objects.filter(name_wine=wine.name_wine).order_by('-rate').aggregate(Avg('rate'))
+        
+        if None is not list_rate.get('rate__avg'):
+            avg_rate = round(list_rate.get("rate__avg"))
+            ranking_list.append((wine.name_wine, avg_rate))
+    context = {"object_list": ranking_list}
+    return render(request, 'ranking.html', context)
