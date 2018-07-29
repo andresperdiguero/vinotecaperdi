@@ -5,8 +5,6 @@ from django.contrib.auth.decorators import login_required
 from vinotecaperdi.addwine.forms import VoteWineForm
 from django.db.models import Avg
 
-import numpy as np
-
 @login_required
 def thanks(request):
     return render(request, 'thanks.html')
